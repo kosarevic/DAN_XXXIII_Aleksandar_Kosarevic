@@ -25,7 +25,7 @@ namespace Zadatak_1
             Thread t3 = new Thread(new ThreadStart(() => Method()));
             Thread t4 = new Thread(new ThreadStart(() => Method()));
             //Loop made for assigning names to threads in specific order and manner.
-            for (int i = 1; i <= 2; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 if (i == 1)
                 {
@@ -33,26 +33,35 @@ namespace Zadatak_1
                     {
                         Name = string.Format("THREAD_{0}", i)
                     };
+
+                    Console.WriteLine(t1.Name + " has been created.");
+                }
+                else if (i == 2)
+                {
                     t2 = new Thread(new ThreadStart(() => Method()))
                     {
-                        Name = string.Format("THREAD_{0}{1}", i + 1, i + 1)
+                        Name = string.Format("THREAD_{0}{1}", i, i)
                     };
-                    Console.WriteLine(t1.Name + " has been created.");
+
                     Console.WriteLine(t2.Name + " has been created.");
                 }
-                else
+                else if (i == 3)
                 {
                     t3 = new Thread(new ThreadStart(() => Method()))
                     {
-                        Name = string.Format("THREAD_{0}", i + 1)
+                        Name = string.Format("THREAD_{0}", i)
                     };
+
+                    Console.WriteLine(t3.Name + " has been created.");
+                }
+                else if (i == 4)
+                {
                     t4 = new Thread(new ThreadStart(() => Method()))
                     {
-                        Name = string.Format("THREAD_{0}{1}", i + 2, i + 2)
+                        Name = string.Format("THREAD_{0}{1}", i, i)
                     };
-                    Console.WriteLine(t3.Name + " has been created.");
-                    Console.WriteLine(t4.Name + " has been created.");
 
+                    Console.WriteLine(t4.Name + " has been created.");
                 }
             }
             //Stopwatch starts here.
