@@ -15,44 +15,53 @@ namespace Zadatak_1
         static void Main(string[] args)
         {
             Stopwatch stopWatch = new Stopwatch();
+
+            Thread t1 = new Thread(new ThreadStart(() => Method()));
+            Thread t2 = new Thread(new ThreadStart(() => Method()));
+            Thread t3 = new Thread(new ThreadStart(() => Method()));
+            Thread t4 = new Thread(new ThreadStart(() => Method()));
+
             for (int i = 1; i <= 2; i++)
             {
                 if (i == 1)
                 {
-                    Thread t1 = new Thread(new ThreadStart(() => Method()))
+                    t1 = new Thread(new ThreadStart(() => Method()))
                     {
                         Name = string.Format("THREAD_{0}", i)
                     };
-                    Thread t2 = new Thread(new ThreadStart(() => Method()))
+                    t2 = new Thread(new ThreadStart(() => Method()))
                     {
                         Name = string.Format("THREAD_{0}{1}", i + 1, i + 1)
                     };
                     Console.WriteLine(t1.Name + " has been created.");
                     Console.WriteLine(t2.Name + " has been created.");
-                    stopWatch.Start();
-                    t1.Start();
-                    t2.Start();
-                    t1.Join();
-                    t2.Join();
-                    stopWatch.Stop();
-                    Console.WriteLine("First and second thread completed tasks in: " + stopWatch.Elapsed.TotalMilliseconds + " ms");
                 }
                 else
                 {
-                    Thread t3 = new Thread(new ThreadStart(() => Method()))
+                    t3 = new Thread(new ThreadStart(() => Method()))
                     {
                         Name = string.Format("THREAD_{0}", i + 1)
                     };
-                    Thread t4 = new Thread(new ThreadStart(() => Method()))
+                    t4 = new Thread(new ThreadStart(() => Method()))
                     {
                         Name = string.Format("THREAD_{0}{1}", i + 2, i + 2)
                     };
                     Console.WriteLine(t3.Name + " has been created.");
                     Console.WriteLine(t4.Name + " has been created.");
-                    t3.Start();
-                    t4.Start();
+
                 }
             }
+
+            stopWatch.Start();
+            t1.Start();
+            t2.Start();
+            t1.Join();
+            t2.Join();
+            stopWatch.Stop();
+            Console.WriteLine("First and second thread completed tasks in: " + stopWatch.Elapsed.TotalMilliseconds + " ms");
+            t3.Start();
+            t4.Start();
+
             Console.ReadLine();
         }
 
