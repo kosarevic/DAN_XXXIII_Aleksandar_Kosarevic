@@ -170,7 +170,7 @@ namespace Zadatak_1
                     sum += array[i];
                 }
 
-                Console.WriteLine(sum);
+                Console.WriteLine("Sum of all generated numbers: " + sum);
             }
         }
     }
