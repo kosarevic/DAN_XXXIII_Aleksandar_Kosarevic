@@ -10,17 +10,21 @@ using System.Threading.Tasks;
 
 namespace Zadatak_1
 {
+    /// <summary>
+    /// Aplication simulates workload of 4 generated threads, and prints results on console.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
+            //Stopwatch object made for purpose of measuring time needed to complete first and second thread.
             Stopwatch stopWatch = new Stopwatch();
-
+            //Four threades premade before being used throughout application.
             Thread t1 = new Thread(new ThreadStart(() => Method()));
             Thread t2 = new Thread(new ThreadStart(() => Method()));
             Thread t3 = new Thread(new ThreadStart(() => Method()));
             Thread t4 = new Thread(new ThreadStart(() => Method()));
-
+            //Loop made for assigning names to threads in specific order and manner.
             for (int i = 1; i <= 2; i++)
             {
                 if (i == 1)
@@ -51,23 +55,30 @@ namespace Zadatak_1
 
                 }
             }
-
+            //Stopwatch starts here.
             stopWatch.Start();
+            //First and second thread get initiated first.
             t1.Start();
             t2.Start();
+            //Main thread will not continue until first two threads finish their tasks.
             t1.Join();
             t2.Join();
+            //Stopwatch ends measurment here, giving time past during execution of first and second thread.
             stopWatch.Stop();
             Console.WriteLine("First and second thread completed tasks in: " + stopWatch.Elapsed.TotalMilliseconds + " ms");
+            //Last two threads procede with execution from here.
             t3.Start();
             t4.Start();
 
             Console.ReadLine();
         }
 
-
+        /// <summary>
+        /// Method made for puropose of assinging duties to each thread respectevly, when thread gets activated.
+        /// </summary>
         static void Method()
         {
+            //Workload assigned to first thread.
             if (Thread.CurrentThread.Name == "THREAD_1")
             {
                 int[,] array = new int[100, 100];
@@ -92,6 +103,7 @@ namespace Zadatak_1
                     sw.Close();
                 }
             }
+            //Workload assigned to second thread.
             if (Thread.CurrentThread.Name == "THREAD_22")
             {
                 int[] array = new int[1000];
@@ -124,6 +136,7 @@ namespace Zadatak_1
                     sw.Close();
                 }
             }
+            //Workload assinged to third thread.
             if (Thread.CurrentThread.Name == "THREAD_3")
             {
                 using (StreamReader sr = File.OpenText("..//..//Files/FileByThread_1.txt"))
@@ -135,6 +148,7 @@ namespace Zadatak_1
                     }
                 }
             }
+            //Workload assinged to forth thread.
             if (Thread.CurrentThread.Name == "THREAD_44")
             {
                 int[] array = new int[1000];
